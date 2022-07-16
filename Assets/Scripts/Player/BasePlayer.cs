@@ -5,6 +5,7 @@ using UnityEngine;
 public abstract class BasePlayer : MonoBehaviour
 {
     // Start is called before the first frame update
+    [SerializeField] public bool isPlayerTurn;
     void Start()
     {
         

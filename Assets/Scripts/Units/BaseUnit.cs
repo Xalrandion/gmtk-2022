@@ -2,9 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BaseUnit : MonoBehaviour
+public class BaseUnit : MonoBehaviour, IGrabbable
 {
     [SerializeField] public Gauge HPgauge = new(5 , 5);
+    [SerializeField] public float speed = 5f;
+
+    private Vector3 velocity;
+
+    public ISlot owner;
 
     public BaseUnitData UnitData
     {
@@ -18,6 +23,7 @@ public class BaseUnit : MonoBehaviour
         private set { baseDamage = value; }
     }
     [SerializeField] private float baseDamage = 1;
+    private bool isGrabbed;
 
     // Start is called before the first frame updat
     public float CalcDamage()
@@ -68,5 +74,41 @@ public class BaseUnit : MonoBehaviour
         HPgauge.Max = maxLife;
         HPgauge.Current = currentLife;
         baseDamage = damage;
+    }
+
+    private void Update()
+    {
+        if (owner != null && isGrabbed)
+        {
+            if (owner is Lane)
+            {
+                if (this == (owner as Lane).PlayerUnit)
+                {
+                    transform.position = Vector3.SmoothDamp(transform.position, (owner as Lane).CalcPlayerSlotLocation(), ref velocity, speed) ;
+
+                }
+            }
+            else
+            {
+                transform.position = Vector3.SmoothDamp(transform.position, owner.GetGameObject().transform.position, ref velocity, speed);
+            }
+
+        }
+    }
+
+    public void OnGrab()
+    {
+        isGrabbed = true;
+    }
+
+    public void OnDrop()
+    {
+        isGrabbed = false;
+    }
+
+    private void OnDrawGizmos()
+    {
+        Gizmos.color = Color.blue;
+        Gizmos.DrawLine(transform.position, transform.position + (transform.up * -1 * 100));
     }
 }
