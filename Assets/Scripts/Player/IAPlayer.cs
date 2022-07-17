@@ -36,7 +36,7 @@ public class IAPlayer : BasePlayer
             {
                 Debug.Log("no ennemi unit: adding one");
                 numberOfUnitAddedThisTurn += 1;
-                var newUnit = unitManager.GenerateUnit(isEnnemy, lane);
+                var newUnit = unitManager.GenerateUnit(isEnnemy, lane, Random.Range(1, 7), Random.Range(1, 7));
                 lane.DropUnit(isEnnemy);
                 lane.SetUnit(newUnit, isEnnemy);
                 newUnit.gameObject.transform.position = lane.CalcEnnemySlotLocation() + new Vector3(0, 1, 0);
@@ -46,7 +46,7 @@ public class IAPlayer : BasePlayer
             {
                 Debug.Log("no plyer unit: adding one");
                 numberOfUnitAddedThisTurn += 1;
-                var newUnit = unitManager.GenerateUnit(isEnnemy, lane);
+                var newUnit = unitManager.GenerateUnit(isEnnemy, lane, Random.Range(1, 7), Random.Range(1, 7));
                 lane.DropUnit(isEnnemy);
                 lane.SetUnit(newUnit, isEnnemy);
                 newUnit.gameObject.transform.position = lane.CalcPlayerSlotLocation() + new Vector3(0, 1, 0);

@@ -26,7 +26,7 @@ public class Lane : MonoBehaviour, ISlot
     // Update is called once per frame
     void Update()
     {
-        GetComponent<BoxCollider>().size = new Vector3(1.5f, 0.1f, (PlayerSideDistance * 2) + 5);
+        GetComponent<BoxCollider>().size = new Vector3(1.5f, 2f, (PlayerSideDistance * 2) + 5);
         //ennemyUnit?.transform.LookAt(CalcPlayerSlotLocation() + new Vector3(0, 1, 0));
         //playerUnit?.transform.LookAt(CalcEnnemySlotLocation() + new Vector3(0, 1, 0));
 
@@ -140,8 +140,8 @@ public class Lane : MonoBehaviour, ISlot
         playerUnit = null;
     }
 
-    public Vector3 CalcEnnemySlotLocation() => (transform.forward * PlayerSideDistance * -1) + transform.position + new Vector3(0, 1.2f, 0);
-    public Vector3 CalcPlayerSlotLocation() => (transform.forward * PlayerSideDistance) + transform.position + new Vector3(0, 1.2f, 0);
+    public Vector3 CalcEnnemySlotLocation() => (transform.forward * PlayerSideDistance * -1) + transform.position + new Vector3(0, 0f, 0);
+    public Vector3 CalcPlayerSlotLocation() => (transform.forward * PlayerSideDistance) + transform.position + new Vector3(0, 0f, 0);
 
 
     private void OnDrawGizmos()

@@ -53,7 +53,7 @@ public class Player : BasePlayer
     {
         this.mngr = mngr;
 
-        var task = diceController.Throw();
+        var task = diceController.WaitforNextThrow();
         while (!task.IsCompleted) {
             yield return null;
         }
@@ -65,7 +65,7 @@ public class Player : BasePlayer
             Destroy(unit.gameObject);
         }
 
-        var newUnit = unitManager.GenerateUnit(false, this.deckSlot);
+        var newUnit = unitManager.GenerateUnit(false, this.deckSlot, task.Result.attack, task.Result.defence);
         deckSlot.GetOwnership(newUnit, this);
         newUnit.transform.position = deckSlot.transform.position + new Vector3(0, 1, 0);
 
