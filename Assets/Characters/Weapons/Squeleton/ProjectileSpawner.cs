@@ -8,7 +8,7 @@ public class ProjectileSpawner : MonoBehaviour
     public Transform? projectilePrefab;
     public Transform? projectileSpawn;
     [HideInInspector] public Transform? projectile;
-    [HideInInspector] public Vector3 targetPosition;
+    private Vector3 targetPosition;
     public float travelTime;
     private float travelStart;
     void Start()

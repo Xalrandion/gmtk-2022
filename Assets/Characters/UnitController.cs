@@ -8,7 +8,7 @@ public class UnitController : MonoBehaviour
 {
     public Animator? anime;
     public UnityEvent<Vector3> onAttack = new();
-    public Transform? target;
+
 
     void Start()
     {
@@ -18,15 +18,13 @@ public class UnitController : MonoBehaviour
     }
 
     private void Update() {
-        if (Input.GetMouseButtonDown(0)) {
-            Attack(target!.position);
-        }
-        if (Input.GetMouseButtonDown(1)) {
-            Defeat();
-        }
     }
-    void Attack(Vector3 Target) {
-        anime?.Play("Attack");
+
+    public void RangeAttack(Vector3 Target) {
+        anime?.Play("RangeAttack");
+        onAttack?.Invoke(Target);
+    }
+    public void MeleeAttack(Vector3 Target) {
         onAttack?.Invoke(Target);
     }
 
