@@ -11,6 +11,7 @@ public class BaseUnit : MonoBehaviour, IGrabbable
     [SerializeField] private Vector3 restingPlace;
 
     public ISlot owner;
+    public bool canSnapBack = false;
 
     private UnitController unitController;
 
@@ -31,7 +32,7 @@ public class BaseUnit : MonoBehaviour, IGrabbable
         private set { baseDamage = value; }
     }
     [SerializeField] private float baseDamage = 1;
-    private bool isGrabbed;
+    public bool isGrabbed;
 
     // Start is called before the first frame updat
     public float CalcDamage()
@@ -103,8 +104,12 @@ public class BaseUnit : MonoBehaviour, IGrabbable
 
     private void Update()
     {
-        if (owner != null && !isGrabbed && restingPlace != Vector3.zero)
+        if (owner != null && !isGrabbed && restingPlace != Vector3.zero && canSnapBack)
         {
+            if (Vector3.Distance(transform.position, restingPlace) < 0.1f)
+            {
+                canSnapBack = false;
+            }
             transform.position = Vector3.SmoothDamp(transform.position, restingPlace, ref velocity, speed);
         }
     }
@@ -112,6 +117,7 @@ public class BaseUnit : MonoBehaviour, IGrabbable
     public void OnGrab()
     {
         isGrabbed = true;
+        canSnapBack = true;
     }
 
     public void OnDrop()
@@ -130,6 +136,7 @@ public class BaseUnit : MonoBehaviour, IGrabbable
     public void SetRestingPlace(Vector3 restingPlace)
     {
         this.restingPlace = restingPlace;
+        canSnapBack = true;
     }
 
 }
