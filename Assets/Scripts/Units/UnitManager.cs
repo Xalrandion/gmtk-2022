@@ -9,17 +9,18 @@ public class UnitManager : MonoBehaviour
     [SerializeField] private BaseUnitData WarriorData;
 
 
-    public BaseUnit GenerateUnit(bool isEnnemy)
+    public BaseUnit GenerateUnit(bool isEnnemy, ISlot owner)
     {
         var unitTemplates = new List<BaseUnitData> { MageData, RangerData, WarriorData };
 
-        var selected = unitTemplates[Random.Range(0, 2)];
+        var selected = unitTemplates[Random.Range(0, 3)];
 
         var obj = Instantiate(isEnnemy ? selected.EnnemyPrefab : selected.PlayerPrefeb);
         var maxLife = Random.Range(0, 5);
         
         var resObj = obj.GetComponent<BaseUnit>();
         resObj.SetStats(maxLife, maxLife, Random.Range(1, 5));
+        resObj.owner = owner;
 
         return resObj;
     }

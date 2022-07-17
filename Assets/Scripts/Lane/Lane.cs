@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Lane : MonoBehaviour
+public class Lane : MonoBehaviour, ISlot
 {
     public BaseUnit PlayerUnit
     {
@@ -20,13 +20,13 @@ public class Lane : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        //GetComponent<BoxCollider>().size = new Vector3(1.5f, 1, (PlayerSideDistance * 2) + 1);
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+        GetComponent<BoxCollider>().size = new Vector3(1.5f, 0.1f, (PlayerSideDistance * 2) + 1);
     }
 
     // Returns dammage to player
@@ -76,11 +76,13 @@ public class Lane : MonoBehaviour
 
     public void SetUnit(BaseUnit target, bool isEnnemy)
     {
+        target.owner = this;
         if (isEnnemy)
         {
             ennemyUnit = target;
             ennemyUnit.transform.position = CalcEnnemySlotLocation();
             ennemyUnit.transform.LookAt(CalcPlayerSlotLocation());
+            
             return;
         }
 
@@ -99,8 +101,8 @@ public class Lane : MonoBehaviour
         playerUnit = null;
     }
 
-    private Vector3 CalcEnnemySlotLocation() => (transform.forward * PlayerSideDistance * -1) + transform.position;
-    private Vector3 CalcPlayerSlotLocation() => (transform.forward * PlayerSideDistance) + transform.position;
+    public Vector3 CalcEnnemySlotLocation() => (transform.forward * PlayerSideDistance * -1) + transform.position;
+    public Vector3 CalcPlayerSlotLocation() => (transform.forward * PlayerSideDistance) + transform.position;
 
 
     private void OnDrawGizmos()
@@ -113,4 +115,29 @@ public class Lane : MonoBehaviour
         Gizmos.color = Color.red;
         Gizmos.DrawLine((transform.forward * PlayerSideDistance) + transform.position, (transform.forward * PlayerSideDistance * -1) + transform.position);
     }
+
+    public ISlot.SlotReqResponse GetOwnership(BaseUnit grabbed, BasePlayer grabber)
+    {
+        if (!grabber.isPlayerTurn) return ISlot.SlotReqResponse.KO;
+        if (playerUnit != null) return ISlot.SlotReqResponse.KO;
+        if (grabbed == null) return ISlot.SlotReqResponse.OK;
+        SetUnit(grabbed, false);
+        return ISlot.SlotReqResponse.OK;
+    }
+
+    public ISlot.SlotReqResponse DropOwnership(BasePlayer grabber)
+    {
+        if (!grabber.isPlayerTurn) return ISlot.SlotReqResponse.KO;
+        DropUnit(false);
+        return ISlot.SlotReqResponse.OK;
+    }
+
+    public BaseUnit GetSlotContent()
+    {
+        return playerUnit;
+    }
+
+    public GameObject GetGameObject() => this.gameObject;
+
+    public Vector3 GetSlotLocation() => CalcPlayerSlotLocation();
 }
