@@ -17,7 +17,7 @@ public abstract class BasePlayer : MonoBehaviour
         
     }
 
-    public abstract void StartTurn(GameManager mngr);
+    public abstract IEnumerator StartTurn(GameManager mngr);
     public abstract void TakeDamage(float damage);
 
     public abstract bool IsDead();

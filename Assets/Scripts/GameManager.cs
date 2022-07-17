@@ -73,7 +73,7 @@ public class GameManager : MonoBehaviour
     {
         yield return new WaitForSeconds(1);
         Debug.Log("Start player sub turn...");
-        player.StartTurn(this);
+        yield return player.StartTurn(this);
         yield return null;
     }
 
@@ -81,7 +81,7 @@ public class GameManager : MonoBehaviour
     {
         yield return new WaitForSeconds(1);
         Debug.Log("Start ai sub turn...");
-        ai.StartTurn(this);
+        yield return ai.StartTurn(this);
         yield return null;
     }
 

@@ -12,6 +12,8 @@ public class Player : BasePlayer
     [SerializeField] private DeckSlot deckSlot;
     [SerializeField] private UnitManager unitManager;
 
+    public DiceController diceController;
+
     private GameManager mngr;
 
     private Vector3 velocity = Vector3.zero;
@@ -46,9 +48,14 @@ public class Player : BasePlayer
 
     public override bool IsDead() => hp.Current <= 0;
 
-    public override void StartTurn(GameManager mngr)
+    public override IEnumerator StartTurn(GameManager mngr)
     {
         this.mngr = mngr;
+
+        var task = diceController.Throw();
+        while (!task.IsCompleted) {
+            yield return null;
+        }
 
         var unit = deckSlot.GetSlotContent();
         if (unit != null)
@@ -93,7 +100,7 @@ public class Player : BasePlayer
         targetCurrentSlot.GetOwnership(other, this);
     }
 
-    // I'm very sorry for your eyes whoever you are :)
+    // I'm very sorry for your eyes whoever you are :)  <- fuck u alexandre
     private IEnumerator DragUpdate(GameObject target)
     {
         var initialDistance = Vector3.Distance(target.transform.position, mainCamera.transform.position);
