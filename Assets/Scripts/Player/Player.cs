@@ -38,6 +38,7 @@ public class Player : BasePlayer
 
     private void EndTurnPress(InputAction.CallbackContext ctx)
     {
+        if (!isPlayerTurn) return;
         EndTurn();
     }
 

@@ -37,10 +37,14 @@ public class Lane : MonoBehaviour, ISlot
 
     private IEnumerator DoAttackWithAnim(AttackDoneCB cb)
     {
+        if (EnnemyUnit != null) EnnemyUnit.isGrabbed = true;
+        if (PlayerUnit != null) PlayerUnit.isGrabbed = true;
         EnnemyUnit?.DoAttackAnim(CalcPlayerSlotLocation());
-        yield return new WaitForSeconds(1);
+        yield return new WaitForSeconds(1.5f);
         PlayerUnit?.DoAttackAnim(CalcEnnemySlotLocation());
-        yield return new WaitForSeconds(1);
+        yield return new WaitForSeconds(1.5f);
+        if (EnnemyUnit != null) EnnemyUnit.isGrabbed = false;
+        if (PlayerUnit != null) PlayerUnit.isGrabbed = false;
         var res = DoAttaks();
         cb(res);
     }

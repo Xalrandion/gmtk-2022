@@ -50,6 +50,7 @@ public class GameManager : MonoBehaviour
         {
             return;
         }
+        laneTurn = 0;
         CheckPlayerStillAlive();
         turnCounter += 1;
         EndTurn();
@@ -71,7 +72,7 @@ public class GameManager : MonoBehaviour
 
     IEnumerator StartPlayerTurn()
     {
-        yield return new WaitForSeconds(1);
+        //yield return new WaitForSeconds(1);
         Debug.Log("Start player sub turn...");
         yield return player.StartTurn(this);
         yield return null;
@@ -79,7 +80,7 @@ public class GameManager : MonoBehaviour
 
     IEnumerator StartAITurn()
     {
-        yield return new WaitForSeconds(1);
+        //yield return new WaitForSeconds(1);
         Debug.Log("Start ai sub turn...");
         yield return ai.StartTurn(this);
         yield return null;
