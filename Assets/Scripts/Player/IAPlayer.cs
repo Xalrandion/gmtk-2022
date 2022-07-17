@@ -20,7 +20,7 @@ public class IAPlayer : BasePlayer
         numberOfUnitAddedThisTurn = 0;
     }
 
-    public override void StartTurn(GameManager mngr)
+    public override IEnumerator StartTurn(GameManager mngr)
     {
         var tmp = Mathf.Lerp(1, mngr.Lanes.Count, (float)mngr.TurnCount / 30);
         maxNumberOfUnitAddedByTurn = (uint)Mathf.Floor(tmp);
@@ -28,7 +28,7 @@ public class IAPlayer : BasePlayer
         if (mngr.TurnCount < numberOfGraceTurn)
         {
             EndTurn(mngr);
-            return;
+            yield break;
         }
         mngr.Lanes.ForEach(lane =>
         {

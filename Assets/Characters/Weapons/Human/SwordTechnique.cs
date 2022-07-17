@@ -12,14 +12,12 @@ public class SwordTechnique : MonoBehaviour
     private bool isCharging = false;
     public float travelTime;
     private float travelStart;
-    // Start is called before the first frame update
+
     void Start()
     {
         anim = swordman.GetComponent<Animator>();
         position = swordman.GetComponent<Transform>();
     }
-
-    // Update is called once per frame
     void Update()
     {
         if (isCharging == true) {
