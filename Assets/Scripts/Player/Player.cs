@@ -72,7 +72,7 @@ public class Player : BasePlayer
         isPlayerTurn = true;
     }
 
-    private void EndTurn()
+    public void EndTurn()
     {
         isPlayerTurn = false;
         mngr.SendMessage("EndTurn");
@@ -105,12 +105,13 @@ public class Player : BasePlayer
     private IEnumerator DragUpdate(GameObject target)
     {
         var initialDistance = Vector3.Distance(target.transform.position, mainCamera.transform.position);
+        var initialPos = target.transform.position;
         var unitTarget = target.gameObject.GetComponent<BaseUnit>();
         while (mouseClick.ReadValue<float>() != 0)
         {
             var ray = mainCamera.ScreenPointToRay(Mouse.current.position.ReadValue());
 
-            target.transform.position = Vector3.SmoothDamp(target.transform.position, ray.GetPoint(initialDistance),ref velocity , mouseDragSpeed);
+            target.transform.position = Vector3.SmoothDamp(target.transform.position, new Vector3(ray.GetPoint(initialDistance).x, initialPos.y, ray.GetPoint(initialDistance).z),ref velocity , mouseDragSpeed);
      
             yield return null;
         }
