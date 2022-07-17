@@ -639,6 +639,8 @@ GameObject:
   - component: {fileID: 1265260391061488856}
   - component: {fileID: 1265260391061488859}
   - component: {fileID: 2602728065186096008}
+  - component: {fileID: -4267197226032452281}
+  - component: {fileID: 1862671861278836900}
   m_Layer: 0
   m_Name: SqueletonArcher
   m_TagString: Untagged
@@ -673,7 +675,7 @@ Animator:
   m_GameObject: {fileID: 5486765225943893016}
   m_Enabled: 1
   m_Avatar: {fileID: 9000000, guid: de94b3710b6533a42a1c63d7982c251f, type: 3}
-  m_Controller: {fileID: 9100000, guid: 2ba937890840cc14c809217f59babc13, type: 2}
+  m_Controller: {fileID: 9100000, guid: 48133362137d4c841b328d369c8609f5, type: 2}
   m_CullingMode: 1
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -711,6 +713,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+  isMelee: 0
 --- !u!114 &2602728065186096008
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -726,8 +729,39 @@ MonoBehaviour:
   projectilePrefab: {fileID: 3834228262171177243, guid: 790ad818ef9ea924ca16717488cc9328, type: 3}
   projectileSpawn: {fileID: 1835934583}
   projectile: {fileID: 0}
-  targetPosition: {x: 0, y: 0, z: 0}
   travelTime: 1
+--- !u!114 &-4267197226032452281
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5486765225943893016}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 548d7c0b3cb9e70458997cbf54aa9af7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  HPgauge:
+    current: 5
+    max: 5
+  speed: 0.5
+  restingPlace: {x: 0, y: 0, z: 0}
+  unitData: {fileID: 11400000, guid: 4681bac313647ad4d80d61e8c636fffa, type: 2}
+  baseDamage: 1
+--- !u!65 &1862671861278836900
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5486765225943893016}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 2.394786, z: 1}
+  m_Center: {x: 0, y: 0.69739264, z: 0}
 --- !u!1 &6695990780575430827
 GameObject:
   m_ObjectHideFlags: 0

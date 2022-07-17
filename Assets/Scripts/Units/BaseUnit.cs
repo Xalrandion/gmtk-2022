@@ -8,8 +8,16 @@ public class BaseUnit : MonoBehaviour, IGrabbable
     [SerializeField] public float speed = 5f;
 
     private Vector3 velocity;
+    [SerializeField] private Vector3 restingPlace;
 
     public ISlot owner;
+
+    private UnitController unitController;
+
+    private void Awake()
+    {
+        unitController = GetComponent<UnitController>();
+    }
 
     public BaseUnitData UnitData
     {
@@ -56,7 +64,24 @@ public class BaseUnit : MonoBehaviour, IGrabbable
         var inflictedDmg = CalcDamage(target);
         Debug.Log(gameObject.name + " attacks " + target.name + "for " + inflictedDmg + "damage has " + HPgauge.Current + "/" + HPgauge.Max + " hp");
         return target.ReceiveDamage(inflictedDmg, this);
-    }   
+    }
+    
+    public void DoAttackAnim(Vector3 target)
+    {
+        unitController?.Attack(target);
+    }
+
+    public void KillUnit()
+    {
+        if (unitController == null)
+        {
+            Destroy(this.gameObject);
+        }
+        else
+        {
+            unitController.Defeat();
+        }
+    }
     
     // Negative damage would heal
     // Returns overflow damage
@@ -78,21 +103,9 @@ public class BaseUnit : MonoBehaviour, IGrabbable
 
     private void Update()
     {
-        if (owner != null && isGrabbed)
+        if (owner != null && !isGrabbed && restingPlace != Vector3.zero)
         {
-            if (owner is Lane)
-            {
-                if (this == (owner as Lane).PlayerUnit)
-                {
-                    transform.position = Vector3.SmoothDamp(transform.position, (owner as Lane).CalcPlayerSlotLocation(), ref velocity, speed) ;
-
-                }
-            }
-            else
-            {
-                transform.position = Vector3.SmoothDamp(transform.position, owner.GetGameObject().transform.position, ref velocity, speed);
-            }
-
+            transform.position = Vector3.SmoothDamp(transform.position, restingPlace, ref velocity, speed);
         }
     }
 
@@ -109,6 +122,14 @@ public class BaseUnit : MonoBehaviour, IGrabbable
     private void OnDrawGizmos()
     {
         Gizmos.color = Color.blue;
-        Gizmos.DrawLine(transform.position, transform.position + (transform.up * -1 * 100));
+        Gizmos.DrawLine(transform.position + (transform.TransformDirection((transform.up) * 50)), transform.position + (transform.up * -1 * 100));
+        Gizmos.color = Color.green;
+        Gizmos.DrawLine(transform.position, transform.position + (transform.forward * 1));
     }
+
+    public void SetRestingPlace(Vector3 restingPlace)
+    {
+        this.restingPlace = restingPlace;
+    }
+
 }

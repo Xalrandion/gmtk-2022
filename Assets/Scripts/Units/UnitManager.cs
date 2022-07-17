@@ -16,11 +16,14 @@ public class UnitManager : MonoBehaviour
         var selected = unitTemplates[Random.Range(0, 3)];
 
         var obj = Instantiate(isEnnemy ? selected.EnnemyPrefab : selected.PlayerPrefeb);
-        var maxLife = Random.Range(0, 5);
+        obj.transform.Rotate(new Vector3(0, 1, 0), 180);
+        var maxLife = Random.Range(1, 5);
         
         var resObj = obj.GetComponent<BaseUnit>();
         resObj.SetStats(maxLife, maxLife, Random.Range(1, 5));
         resObj.owner = owner;
+
+
 
         return resObj;
     }

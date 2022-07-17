@@ -16,5 +16,5 @@ MonoBehaviour:
   StrongMatchBonus: 0.5
   BadMatch: {fileID: 11400000, guid: 4681bac313647ad4d80d61e8c636fffa, type: 2}
   BadMatchBonus: -0.5
-  PlayerPrefeb: {fileID: 956100793350943195, guid: 2d14f2c64be213c4c980ce007330a101, type: 3}
-  EnnemyPrefab: {fileID: 956100793350943195, guid: a46a933725c0e9d4b9652bfc35de06a0, type: 3}
+  PlayerPrefeb: {fileID: 3977272842457565419, guid: 2352fe34027240342931b535b91f2f4a, type: 3}
+  EnnemyPrefab: {fileID: 6464921438420692009, guid: c8f0ecc857bd40846910536b3369ea54, type: 3}

@@ -19,6 +19,7 @@ public class DeckSlot : MonoBehaviour, ISlot
     {
         unit = grabbed;
         unit.owner = this;
+        unit.SetRestingPlace(transform.position);
         return ISlot.SlotReqResponse.OK;
     }
 
@@ -30,4 +31,10 @@ public class DeckSlot : MonoBehaviour, ISlot
     public GameObject GetGameObject() => this.gameObject;
 
     public Vector3 GetSlotLocation() => this.transform.position;
+
+    private void OnDrawGizmos()
+    {
+        Gizmos.color = Color.green;
+        Gizmos.DrawCube(GetSlotLocation(), new Vector3(1, 0.1f, 1));
+    }
 }

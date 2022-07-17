@@ -664,6 +664,8 @@ GameObject:
   m_Component:
   - component: {fileID: 5977353570715907731}
   - component: {fileID: 293859547961027817}
+  - component: {fileID: 4313083785810734248}
+  - component: {fileID: 8563222138808849376}
   m_Layer: 0
   m_Name: MageSqueleton
   m_TagString: Untagged
@@ -707,6 +709,38 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &4313083785810734248
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6464921438420692009}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 548d7c0b3cb9e70458997cbf54aa9af7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  HPgauge:
+    current: 5
+    max: 5
+  speed: 0.5
+  restingPlace: {x: 0, y: 0, z: 0}
+  unitData: {fileID: 11400000, guid: b68bf235393217a43839d40ce81155cf, type: 2}
+  baseDamage: 1
+--- !u!65 &8563222138808849376
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6464921438420692009}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 2.2596064, z: 1}
+  m_Center: {x: 0, y: 0.6298032, z: 0}
 --- !u!1 &7007131333303534099
 GameObject:
   m_ObjectHideFlags: 0

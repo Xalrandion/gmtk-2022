@@ -6,4 +6,5 @@ public interface IGrabbable
 {
     void OnGrab();
     void OnDrop();
+    void SetRestingPlace(Vector3 restingPlace);
 }

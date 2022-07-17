@@ -27,6 +27,9 @@ public class Lane : MonoBehaviour, ISlot
     void Update()
     {
         GetComponent<BoxCollider>().size = new Vector3(1.5f, 0.1f, (PlayerSideDistance * 2) + 1);
+        //ennemyUnit?.transform.LookAt(CalcPlayerSlotLocation() + new Vector3(0, 1, 0));
+        //playerUnit?.transform.LookAt(CalcEnnemySlotLocation() + new Vector3(0, 1, 0));
+
     }
 
     // Returns dammage to player
@@ -53,15 +56,25 @@ public class Lane : MonoBehaviour, ISlot
         if (EnnemyUnit != null && EnnemyUnit.HPgauge.Current <= 0)
         {
             Debug.Log("Ennemy unit is dead");
-            Destroy(EnnemyUnit.gameObject);
+            var unitToKill = EnnemyUnit;
+
             DropUnit(true);
+            unitToKill?.KillUnit();
+            // Destroy(EnnemyUnit.gameObject);
+
         }
         if (PlayerUnit != null && PlayerUnit.HPgauge.Current <= 0)
         {
             Debug.Log("Player unit is dead");
-            Destroy(PlayerUnit.gameObject);
+            var unitToKill = PlayerUnit;
+
             DropUnit(false);
+            unitToKill?.KillUnit();
+            //Destroy(PlayerUnit.gameObject);
+
         }
+
+       
     }
 
     public LaneTurnResult CalcTurn(uint turn)
@@ -80,15 +93,16 @@ public class Lane : MonoBehaviour, ISlot
         if (isEnnemy)
         {
             ennemyUnit = target;
-            ennemyUnit.transform.position = CalcEnnemySlotLocation();
-            ennemyUnit.transform.LookAt(CalcPlayerSlotLocation());
+            ennemyUnit.SetRestingPlace(CalcEnnemySlotLocation());
+            ennemyUnit.transform.Rotate(new Vector3(0, 1, 0), 180);
+            //ennemyUnit.transform.LookAt(CalcPlayerSlotLocation());
             
             return;
         }
 
         playerUnit = target;
-        playerUnit.transform.position = CalcPlayerSlotLocation();
-        playerUnit.transform.LookAt(CalcEnnemySlotLocation());
+        playerUnit.SetRestingPlace(CalcPlayerSlotLocation());
+        //playerUnit.transform.LookAt(CalcEnnemySlotLocation());
     }
 
     public void DropUnit(bool isEnnemy)
@@ -101,8 +115,8 @@ public class Lane : MonoBehaviour, ISlot
         playerUnit = null;
     }
 
-    public Vector3 CalcEnnemySlotLocation() => (transform.forward * PlayerSideDistance * -1) + transform.position;
-    public Vector3 CalcPlayerSlotLocation() => (transform.forward * PlayerSideDistance) + transform.position;
+    public Vector3 CalcEnnemySlotLocation() => (transform.forward * PlayerSideDistance * -1) + transform.position + new Vector3(0, 1.2f, 0);
+    public Vector3 CalcPlayerSlotLocation() => (transform.forward * PlayerSideDistance) + transform.position + new Vector3(0, 1.2f, 0);
 
 
     private void OnDrawGizmos()
@@ -140,4 +154,9 @@ public class Lane : MonoBehaviour, ISlot
     public GameObject GetGameObject() => this.gameObject;
 
     public Vector3 GetSlotLocation() => CalcPlayerSlotLocation();
+
+    public Vector3 GetSlotLocation(BasePlayer player)
+    {
+        return Vector3.zero;
+    }
 }

@@ -78,15 +78,16 @@ public class GameManager : MonoBehaviour
         if (subTurn == 0)
         {
             subTurn += 1;
-            StartCoroutine(StartPlayerTurn());
+            StartCoroutine(StartAITurn());
             return;
         }
         if (subTurn == 1)
         {
             subTurn += 1;
-            StartCoroutine(StartAITurn());
+            StartCoroutine(StartPlayerTurn());
             return;
         }
+        
 
         subTurn = 0;
         Debug.Log("End last of turn: " + turnCounter);

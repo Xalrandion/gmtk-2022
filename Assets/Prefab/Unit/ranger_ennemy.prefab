@@ -110,8 +110,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 548d7c0b3cb9e70458997cbf54aa9af7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gauge:
+  HPgauge:
     current: 5
     max: 5
+  speed: 0.5
+  restingPlace: {x: 0, y: 0, z: 0}
   unitData: {fileID: 11400000, guid: 4681bac313647ad4d80d61e8c636fffa, type: 2}
   baseDamage: 1

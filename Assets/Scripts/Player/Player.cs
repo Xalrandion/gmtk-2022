@@ -51,12 +51,15 @@ public class Player : BasePlayer
         this.mngr = mngr;
 
         var unit = deckSlot.GetSlotContent();
-        deckSlot.DropOwnership(this);
-        Destroy(unit);
+        if (unit != null)
+        {
+            deckSlot.DropOwnership(this);
+            Destroy(unit.gameObject);
+        }
 
         var newUnit = unitManager.GenerateUnit(false, this.deckSlot);
         deckSlot.GetOwnership(newUnit, this);
-        newUnit.transform.position = deckSlot.transform.position;
+        newUnit.transform.position = deckSlot.transform.position + new Vector3(0, 1, 0);
 
         isPlayerTurn = true;
     }
@@ -90,6 +93,7 @@ public class Player : BasePlayer
         targetCurrentSlot.GetOwnership(other, this);
     }
 
+    // I'm very sorry for your eyes whoever you are :)
     private IEnumerator DragUpdate(GameObject target)
     {
         var initialDistance = Vector3.Distance(target.transform.position, mainCamera.transform.position);

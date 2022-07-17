@@ -126,6 +126,8 @@ GameObject:
   m_Component:
   - component: {fileID: 3331137525594716938}
   - component: {fileID: 8708483088163152240}
+  - component: {fileID: -239493740832295871}
+  - component: {fileID: 8120866798259739556}
   m_Layer: 0
   m_Name: ArcherHuman
   m_TagString: Untagged
@@ -169,6 +171,38 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &-239493740832295871
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2698011605567513008}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 548d7c0b3cb9e70458997cbf54aa9af7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  HPgauge:
+    current: 5
+    max: 5
+  speed: 0.5
+  restingPlace: {x: 0, y: 0, z: 0}
+  unitData: {fileID: 11400000, guid: 4681bac313647ad4d80d61e8c636fffa, type: 2}
+  baseDamage: 1
+--- !u!65 &8120866798259739556
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2698011605567513008}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1.2701833, y: 2.2675078, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &3871218292435492099
 GameObject:
   m_ObjectHideFlags: 0
@@ -258,7 +292,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4352226592103763806}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 3.0297954, y: 1.3032055, z: 3.944655}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:

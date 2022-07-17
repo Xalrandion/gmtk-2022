@@ -309,6 +309,8 @@ GameObject:
   m_Component:
   - component: {fileID: 4357738687556850257}
   - component: {fileID: 7681417943584884779}
+  - component: {fileID: -887003256821509224}
+  - component: {fileID: 3283500111260338842}
   m_Layer: 0
   m_Name: MageHuman
   m_TagString: Untagged
@@ -352,6 +354,38 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &-887003256821509224
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3977272842457565419}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 548d7c0b3cb9e70458997cbf54aa9af7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  HPgauge:
+    current: 5
+    max: 5
+  speed: 0.5
+  restingPlace: {x: 0, y: 0, z: 0}
+  unitData: {fileID: 11400000, guid: b68bf235393217a43839d40ce81155cf, type: 2}
+  baseDamage: 1
+--- !u!65 &3283500111260338842
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3977272842457565419}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 3.075676, z: 1}
+  m_Center: {x: 0, y: 1.037838, z: 0}
 --- !u!1 &4118207337322922599
 GameObject:
   m_ObjectHideFlags: 0

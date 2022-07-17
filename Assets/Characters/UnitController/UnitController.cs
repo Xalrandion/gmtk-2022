@@ -8,7 +8,7 @@ public class UnitController : MonoBehaviour
 {
     public Animator? anime;
     public UnityEvent<Vector3> onAttack = new();
-
+    public bool isMelee = false;
 
     void Start()
     {
@@ -28,7 +28,13 @@ public class UnitController : MonoBehaviour
         onAttack?.Invoke(Target);
     }
 
-    void Defeat() {
+    public void Defeat() {
         anime?.Play("Defeat");
+    }
+
+    public virtual void Attack(Vector3 Target)
+    {
+        if (isMelee) MeleeAttack(Target);
+        else RangeAttack(Target);
     }
 }

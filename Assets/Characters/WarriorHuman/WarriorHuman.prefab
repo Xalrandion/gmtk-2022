@@ -753,6 +753,8 @@ GameObject:
   - component: {fileID: 222891315609194089}
   - component: {fileID: 222891315609194094}
   - component: {fileID: 222891315609194095}
+  - component: {fileID: -2330174625139720651}
+  - component: {fileID: 7192844016275921003}
   m_Layer: 0
   m_Name: WarriorHuman
   m_TagString: Untagged
@@ -767,7 +769,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6826368520287833769}
-  m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -2, y: 0.422, z: 7.082}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -775,7 +777,7 @@ Transform:
   - {fileID: 5943990446475071859}
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!95 &222891315609194089
 Animator:
   serializedVersion: 4
@@ -824,6 +826,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+  isMelee: 1
 --- !u!114 &222891315609194095
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -838,6 +841,38 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   swordman: {fileID: 6826368520287833769}
   travelTime: 1
+--- !u!114 &-2330174625139720651
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6826368520287833769}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 548d7c0b3cb9e70458997cbf54aa9af7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  HPgauge:
+    current: 5
+    max: 5
+  speed: 0.5
+  restingPlace: {x: 0, y: 0, z: 0}
+  unitData: {fileID: 11400000, guid: 9887b126e121cbf4487736293178f709, type: 2}
+  baseDamage: 1
+--- !u!65 &7192844016275921003
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6826368520287833769}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 2.5942917, z: 1}
+  m_Center: {x: -0, y: 0.79714584, z: 0}
 --- !u!1 &6970947424088386009
 GameObject:
   m_ObjectHideFlags: 0
