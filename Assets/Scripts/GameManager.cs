@@ -26,17 +26,33 @@ public class GameManager : MonoBehaviour
         EndTurn();
     }
 
+
+    uint laneTurn = 0;
     // Update is called once per frame
     void CalcBeetweenTurn()
     {
-        float playerDmg = 0;
+        laneTurn = 0;
         foreach (var lane in lanes)
         {
-            var res = lane.CalcTurn(turnCounter);
-            playerDmg += res.PlayerHPLoss;
+            
+            lane.CalcTurn(turnCounter, (r) => {
+                player.TakeDamage(r.PlayerHPLoss);
+                laneTurn += 1;
+                FinishBeetwenTurn();
+            });
+            //playerDmg += res.PlayerHPLoss;
         }
+    }
 
-        player.TakeDamage(playerDmg);
+    void FinishBeetwenTurn()
+    {
+        if (laneTurn < lanes.Count)
+        {
+            return;
+        }
+        CheckPlayerStillAlive();
+        turnCounter += 1;
+        EndTurn();
     }
 
     void CheckPlayerStillAlive()
@@ -51,9 +67,6 @@ public class GameManager : MonoBehaviour
     {
         yield return new WaitForSeconds(1);
         CalcBeetweenTurn();
-        CheckPlayerStillAlive();
-        turnCounter += 1;
-        EndTurn(); 
     }
 
     IEnumerator StartPlayerTurn()

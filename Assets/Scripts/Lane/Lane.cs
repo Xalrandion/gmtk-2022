@@ -26,14 +26,29 @@ public class Lane : MonoBehaviour, ISlot
     // Update is called once per frame
     void Update()
     {
-        GetComponent<BoxCollider>().size = new Vector3(1.5f, 0.1f, (PlayerSideDistance * 2) + 1);
+        GetComponent<BoxCollider>().size = new Vector3(1.5f, 0.1f, (PlayerSideDistance * 2) + 5);
         //ennemyUnit?.transform.LookAt(CalcPlayerSlotLocation() + new Vector3(0, 1, 0));
         //playerUnit?.transform.LookAt(CalcEnnemySlotLocation() + new Vector3(0, 1, 0));
 
     }
 
+    public delegate void AttackDoneCB(float overflowDmg);
+    public delegate void TurnDoneCB(LaneTurnResult result);
+
+    private IEnumerator DoAttackWithAnim(AttackDoneCB cb)
+    {
+        EnnemyUnit?.DoAttackAnim(CalcPlayerSlotLocation());
+        yield return new WaitForSeconds(1);
+        PlayerUnit?.DoAttackAnim(CalcEnnemySlotLocation());
+        yield return new WaitForSeconds(1);
+        var res = DoAttaks();
+        cb(res);
+    }
+    
+
+
     // Returns dammage to player
-    private float DoAttcaks()
+    private float DoAttaks()
     {
         if (EnnemyUnit == null)
         {
@@ -77,14 +92,20 @@ public class Lane : MonoBehaviour, ISlot
        
     }
 
-    public LaneTurnResult CalcTurn(uint turn)
-    {
-        LaneTurnResult res = new();
-        
-        res.PlayerHPLoss = DoAttcaks();
-        DoDeath();
 
-        return res;
+    public void CalcTurn(uint turn, TurnDoneCB cb)
+    {
+        StartCoroutine(DoAttackWithAnim((r) => {
+            LaneTurnResult res = new();
+            res.PlayerHPLoss = r; 
+            DoDeath(); 
+            cb(res); 
+        }));
+
+        //res.PlayerHPLoss = DoAttaks();
+        //DoDeath();
+
+        //return res;
     }
 
     public void SetUnit(BaseUnit target, bool isEnnemy)
